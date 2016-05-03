@@ -11,7 +11,7 @@
 
     <mvc:annotation-driven />
     <tx:annotation-driven/>
-    <context:component-scan base-package="by.bsuir.ief.rest.dao" />
+    <context:component-scan base-package="by.bsuir.ief.rest.dao.hibernatedao" />
     <context:component-scan base-package="by.bsuir.ief.rest.model.service" />
     <context:component-scan base-package="by.bsuir.ief.rest.aspect"/>
     <aop:aspectj-autoproxy />
@@ -39,6 +39,7 @@
                 <prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
                 <prop key="hibernate.connection.charSet">UTF-8</prop>
+                <prop key="log4j.logger.org.hibernate.SQL">DEBUG </prop>
             </props>
         </property>
     </bean>
@@ -48,5 +49,7 @@
           class="org.springframework.orm.hibernate5.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
+
+    <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
 
 </beans>

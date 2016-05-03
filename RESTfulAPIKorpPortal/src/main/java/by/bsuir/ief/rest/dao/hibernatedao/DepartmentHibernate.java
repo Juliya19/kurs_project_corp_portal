@@ -4,7 +4,6 @@ import by.bsuir.ief.rest.dao.DepartmentDAO;
 import by.bsuir.ief.rest.model.entity.Department;
 import by.bsuir.ief.rest.model.exception.notfoundexception.AllEntityNotFountException;
 import by.bsuir.ief.rest.model.exception.notfoundexception.EntityNotFoundByIdException;
-import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -22,7 +21,7 @@ import java.util.List;
  */
 @Repository
 @Transactional
-public class DepartmentHibernate implements DepartmentDAO{
+public class DepartmentHibernate implements DepartmentDAO {
 
     @Qualifier("sessionFactory")
     @Autowired
@@ -73,7 +72,7 @@ public class DepartmentHibernate implements DepartmentDAO{
     }
 
     @Override
-    public void delete(int id) throws EntityNotFoundByIdException {
+    public boolean delete(int id) throws EntityNotFoundByIdException {
         session = getCurrentSession();
         Query query = session.createQuery(HQL_FIND_BY_ID_DEPARTMENT);
         query.setParameter("idDepartment", id);
@@ -82,5 +81,6 @@ public class DepartmentHibernate implements DepartmentDAO{
             throw new EntityNotFoundByIdException(id, Department.class.getName());
         }
         session.delete(department);
+        return true;
     }
 }

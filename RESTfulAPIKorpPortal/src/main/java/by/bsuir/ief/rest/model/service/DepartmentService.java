@@ -1,7 +1,7 @@
 package by.bsuir.ief.rest.model.service;
 
 
-import by.bsuir.ief.rest.dao.hibernatedao.DepartmentHibernate;
+import by.bsuir.ief.rest.dao.DepartmentDAO;
 import by.bsuir.ief.rest.model.entity.Department;
 import by.bsuir.ief.rest.model.entity.Task;
 import by.bsuir.ief.rest.model.exception.badexception.BadAddEntityException;
@@ -12,7 +12,6 @@ import by.bsuir.ief.rest.model.exception.notfoundexception.AllEntityNotFountExce
 import by.bsuir.ief.rest.model.exception.notfoundexception.EntityNotFoundByIdException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -25,7 +24,7 @@ public class DepartmentService {
 
     @Qualifier("departmentHibernate")
     @Autowired
-    private DepartmentHibernate departmentHibernate;
+    private DepartmentDAO departmentHibernate;
 
     /**
      *
@@ -98,13 +97,15 @@ public class DepartmentService {
      * @throws EntityNotFoundByIdException
      * @throws BadDeleteEntityException
      */
-    public void delete(int id) throws EntityNotFoundByIdException, BadDeleteEntityException {
+    public boolean delete(int id) throws EntityNotFoundByIdException, BadDeleteEntityException {
+        boolean delete = false;
         try {
-            departmentHibernate.delete(id);
+            delete = departmentHibernate.delete(id);
         } catch (EntityNotFoundByIdException e) {
             throw e;
         }catch (Exception e) {
             throw new BadDeleteEntityException(e.getMessage(),Department.class.toString(),e);
         }
+        return delete;
     }
 }

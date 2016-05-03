@@ -1,0 +1,32 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: Darya
+  Date: 29.04.16
+  Time: 08:05
+  To change this template use File | Settings | File Templates.
+--%>
+
+<%@ page pageEncoding="UTF-8" %>
+
+
+<!-- footer content -->
+<footer>
+    <div class="pull-right">
+       BSUIR IEF Даша, Юля, Влад, Андрей<a href="https://bsuir.by">BSUIR</a>
+    </div>
+    <div class="clearfix"></div>
+</footer>
+<!-- /footer content -->
+
+                <!--END main_container -->
+            </div>
+
+        <!-- END CONTAINER BODY DIV -->
+        </div>
+
+    </div>
+    <!-- END Container nav-md Body  -->
+
+</body>
+</html>
+

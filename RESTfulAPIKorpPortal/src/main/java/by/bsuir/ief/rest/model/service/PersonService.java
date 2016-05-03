@@ -1,8 +1,7 @@
 package by.bsuir.ief.rest.model.service;
 
-import by.bsuir.ief.rest.dao.PersonDAO;
-import by.bsuir.ief.rest.dao.hibernatedao.PersonHibernate;
 import by.bsuir.ief.rest.model.entity.Person;
+import by.bsuir.ief.rest.dao.PersonDAO;
 import by.bsuir.ief.rest.model.exception.badexception.BadAddEntityException;
 import by.bsuir.ief.rest.model.exception.badexception.BadDeleteEntityException;
 import by.bsuir.ief.rest.model.exception.badexception.BadGetEntityException;
@@ -24,7 +23,7 @@ public class PersonService {
 
     @Qualifier("personHibernate")
     @Autowired
-    private PersonHibernate personDao;
+    private PersonDAO personDao;
 
     /**
      *
@@ -55,6 +54,7 @@ public class PersonService {
         } catch (EntityNotFoundByIdException e) {
             throw e;
         }catch (Exception e) {
+            e.printStackTrace();
             throw new BadGetEntityException(Person.class.toString(),e);
         }
         return person;

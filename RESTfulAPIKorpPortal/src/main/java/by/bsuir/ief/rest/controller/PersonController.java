@@ -24,10 +24,12 @@ import java.util.List;
 @RequestMapping("/personapi")
 public class PersonController {
 
-
-    @Qualifier("personService")
-    @Autowired
     private PersonService personService;
+
+    @Autowired
+    public PersonController(PersonService personService) {
+        this.personService = personService;
+    }
 
     //----------------------BEGIN GET METHOD-------------------------//
 
@@ -46,7 +48,8 @@ public class PersonController {
         } catch (EntityNotFoundByIdException e) {
             throw new EntityNotFoundExceptionRest(e.toString());
         } catch (BadGetEntityException e) {
-            throw new BadExceptionRest(e.toString());
+            e.printStackTrace();
+            throw new BadExceptionRest(e.getMessage());
         }
         return person;
     }
